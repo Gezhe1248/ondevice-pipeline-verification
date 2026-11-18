@@ -103,7 +103,7 @@ is confidently incorrect with no error. Both are documented as contract clauses 
 python -m pip install -r requirements.txt
 
 python -m pytest -q                      # 32 rule-level cases
-python -m src.offline_test --rounds 1    # 9 rounds, 0 outbound attempts, positive control
+python -m src.offline_test               # 27 rounds, 0 outbound attempts, positive control
 python -m src.verify_onnx --demo         # export check, synthetic (reporting path only)
 python -m src.bench_backends --stub      # backend comparison harness, synthetic
 ```
