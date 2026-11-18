@@ -1,0 +1,32 @@
+# ---- model weights / binaries: never commit ----
+*.safetensors
+*.pt
+*.onnx
+*.bin
+*.gguf
+*.mp3
+*.wav
+
+# ---- secrets / credentials ----
+.env
+.env.*
+*_key*
+*secret*
+
+# ---- python ----
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+pytest-cache-files-*/
+*.egg-info/
+
+# ---- logs & local reports ----
+*.log
+*.jsonl
+runs/
+out/
+
+# ---- OS noise ----
+.DS_Store
+Thumbs.db

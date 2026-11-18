@@ -1,0 +1,10 @@
+# Runtime dependencies for the verification tools.
+# src/guard.py and src/offline_test.py use the standard library only.
+# src/verify_onnx.py needs numpy (always) and onnxruntime (real-mode only).
+# src/bench_backends.py needs nothing beyond the standard library (--stub runs anywhere).
+
+numpy>=1.24
+onnxruntime>=1.16          # only needed for `python -m src.verify_onnx --onnx ...`
+
+# ---- development ----
+pytest>=7.4
