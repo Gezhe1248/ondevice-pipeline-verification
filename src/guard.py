@@ -106,7 +106,7 @@ class GuardPolicy:
     """后处理策略。所有阈值都是**显式参数**，不在代码里散落魔法数字。
 
     Attributes:
-        max_sentences: 句数上限（人设写 2-4 句时取 4；兜底不该比人设更严）。
+        max_sentences: 句数上限（上游约定写 2-4 句时取 4；兜底不该比上游约定更严）。
         max_questions: 全篇问号上限，``None`` = 不限制。
         drop_prescriptive: 是否删掉说教句式（见 ``PRESCRIPTIVE_MARKERS``）。
         trusted_numbers: 受信号码（人工核对过的）。命中即整段原样返回。
@@ -276,7 +276,7 @@ def strip_foreign_words(text: str, trusted_numbers: Iterable[str] = ()) -> tuple
         不值得原样交给用户。只删不编；删空则由调用方走固定兜底话术。
         含受信号码时不介入（号码所在句可能是必须原样送达的文本，不能删）。
 
-    ⚠️ 这里的豁免只认**号码**，不认"安全词"——按词豁免会导致普通词（"计划""安全"）
+    ⚠️ 这里的豁免只认**号码**，不认"关键词"——按词豁免会导致普通词（"计划""安全"）
        把英文词一起豁免掉，规则静默失效（详见模块 docstring 的反面教材）。
     """
     policy = GuardPolicy(trusted_numbers=frozenset(trusted_numbers))
@@ -440,7 +440,7 @@ def enforce(text: str, policy: GuardPolicy | None = None,
        结果回复被削到平均 2.2 句，好几轮只剩一个问句——那正是"答非所问"的来源。
 
     【句级安全豁免】
-        原先是"出现任一安全词就整段原样返回"，导致问号/句数/说教三条约束同时失效
+        原先是"出现任一受保护词就整段原样返回"，导致问号/句数/说教三条约束同时失效
         （实测出现过 2 个问句一起发出去）。现在只保护 ``policy.protected_predicate``
         判定为 True 的句子：这类句子不计入问号上限、截断时优先保留，其余照常修剪。
     """
